@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[17]:
 
 
 from bokeh.io import output_notebook, output_file
@@ -14,7 +14,7 @@ import numpy as np
 import json
 
 
-# In[2]:
+# In[18]:
 
 
 #data I need high, low, open, close, volume, percent change, symbol for 9/25/2020
@@ -25,7 +25,7 @@ import json
 #Currencies: DXY, Euro, Australian Dollar, Japanese Yen, Swiss Franc, Canadian Dollar, British Pound
 
 
-# In[3]:
+# In[19]:
 
 
 # Importing Equities Data
@@ -39,7 +39,7 @@ ym = pd.read_csv('./data/YM=F.csv')
 ym['symbol'] = 'YM'
 
 
-# In[4]:
+# In[20]:
 
 
 # Joining Equities Tables, dropping 9/24 rows, adding percent change column, add Category column
@@ -50,7 +50,7 @@ equities['percent_change'] = ((equities['Close']-equities['Open'])/equities['Ope
 equities
 
 
-# In[5]:
+# In[21]:
 
 
 # Importing Energies Data
@@ -62,7 +62,7 @@ ho = pd.read_csv('./data/HO=F.csv')
 ho['symbol'] = 'HO'
 
 
-# In[6]:
+# In[22]:
 
 
 # Joining Energies Tables, dropping 9/24 rows, adding percent change column, add Category column
@@ -73,7 +73,7 @@ energies['percent_change'] = ((energies['Close']-energies['Open'])/energies['Ope
 energies
 
 
-# In[7]:
+# In[23]:
 
 
 # Importing Metals Data
@@ -87,7 +87,7 @@ hg = pd.read_csv('./data/HG=F.csv')
 hg['symbol'] = 'Hg'
 
 
-# In[8]:
+# In[24]:
 
 
 # Joining metals Tables, dropping 9/24 rows, adding percent change column, add Category column
@@ -98,7 +98,7 @@ metals['percent_change'] = ((metals['Close']-metals['Open'])/metals['Open'])*100
 metals
 
 
-# In[9]:
+# In[25]:
 
 
 # Importing Currencies Data
@@ -116,7 +116,7 @@ s = pd.read_csv('./data/6S=F.csv')
 s['symbol'] = '6S'
 
 
-# In[10]:
+# In[26]:
 
 
 # Joining Currencies Tables, dropping 9/24 rows, adding percent change column, add Category column
@@ -127,7 +127,7 @@ currencies['percent_change'] = ((currencies['Close']-currencies['Open'])/currenc
 currencies
 
 
-# In[11]:
+# In[27]:
 
 
 #adding all the tables together
@@ -136,7 +136,7 @@ futures['size'] = pd.cut(futures.Volume, bins = [0, 500, 5000, 50000, 500000, 50
 futures
 
 
-# In[12]:
+# In[28]:
 
 
 # Convert df to a ColumnDataSource: source
@@ -169,29 +169,29 @@ hover = HoverTool(tooltips=tt)
 p.add_tools(hover)
 
 
-# In[13]:
+# In[29]:
 
 
 # output_notebook()
 
 
-# In[14]:
+# In[30]:
 
 
 # show(p)
 
 
-# In[15]:
+# In[31]:
 
 
 curdoc().add_root(column(p))
-curdoc().title = "Sliders"
 
 
-# In[ ]:
+# In[16]:
 
 
-
+# !jupyter nbconvert --to script myapp.ipynb
+# !bokeh serve --show myapp.py --port 8000 --allow-websocket-origin=*
 
 
 # In[ ]:
